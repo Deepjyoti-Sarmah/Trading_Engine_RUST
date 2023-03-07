@@ -1,5 +1,6 @@
 mod matching_engine;
 use matching_engine::orderbook::{Order, BidOrAsk, Orderbook};
+use matching_engine::engine::{TradingPair, MatchingEngine};
 
 fn main() {
     // let price = Price::new(50.5);
@@ -21,7 +22,15 @@ fn main() {
     orderbook.add_order(20.0, sell_order);
 
     // println!("{:?}",limit);
-    println!("{:?}",orderbook);
+    // println!("{:?}",orderbook);
 
+    let mut engine = MatchingEngine::new();
+    let pair = TradingPair::new("BTC".to_string(), "USD".to_string());
+    engine.add_new_market(pair.clone());
+
+    let buy_order = Order::new(BidOrAsk::Bid, 6.5);
+    // let eth_pair = TradingPair::new("ETH".to_string(), "USD".to_string());
+    engine.place_limit_order(pair, 10.000, buy_order).unwrap();
+    // engine.place_limit_order(eth_pair, 10.000, buy_order).unwrap();
 
 }
