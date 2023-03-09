@@ -1,6 +1,8 @@
 mod matching_engine;
 use matching_engine::orderbook::{Order, BidOrAsk, Orderbook};
 use matching_engine::engine::{TradingPair, MatchingEngine};
+use rust_decimal_macros::dec;
+
 
 fn main() {
     // let price = Price::new(50.5);
@@ -15,11 +17,11 @@ fn main() {
     // limit.add_order(sell_order);
 
     let mut orderbook = Orderbook::new();
-    orderbook.add_order(4.4, buy_order_from_alice);
-    orderbook.add_order(4.4, buy_order_from_bob);
+    orderbook.add_limit_order(dec!(4.4), buy_order_from_alice);
+    orderbook.add_limit_order(dec!(4.4), buy_order_from_bob);
 
     let sell_order = Order::new(BidOrAsk::Ask,6.5);
-    orderbook.add_order(20.0, sell_order);
+    orderbook.add_limit_order(dec!(20.0), sell_order);
 
     // println!("{:?}",limit);
     // println!("{:?}",orderbook);
@@ -30,7 +32,7 @@ fn main() {
 
     let buy_order = Order::new(BidOrAsk::Bid, 6.5);
     // let eth_pair = TradingPair::new("ETH".to_string(), "USD".to_string());
-    engine.place_limit_order(pair, 10.000, buy_order).unwrap();
+    engine.place_limit_order(pair, dec!(10.000), buy_order).unwrap();
     // engine.place_limit_order(eth_pair, 10.000, buy_order).unwrap();
 
 }
