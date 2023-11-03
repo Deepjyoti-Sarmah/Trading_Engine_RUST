@@ -108,7 +108,6 @@ impl Orderbook {
 // }
 
 
-
 #[derive(Debug)]
 pub struct Limit {
     price: Decimal,
